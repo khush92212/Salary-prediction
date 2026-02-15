@@ -17,18 +17,15 @@ encoder = joblib.load("label_encoder.pkl")
 
 st.title("Salary Prediction App")
 
-# Debug (optional - remove after checking keys)
-# st.write("Encoder keys:", encoder.keys())
-
 # Inputs
 age = st.number_input("Age", min_value=18, max_value=60)
 gender = st.selectbox("Gender", encoder["Gender"].classes_)
 education = st.selectbox("Education Level", encoder["Education Level"].classes_)
 job_title = st.selectbox("Job Title", encoder["Job Title"].classes_)
-years_of_exp = st.number_input("Years of Experience",0,40)
+years_of_exp = st.number_input("Years of Experience", min_value=0, max_value=40)
 
 # Create dataframe
-df = pd.dataFrame({
+df = pd.DataFrame({
     "Age": [age],
     "Gender": [gender],
     "Education Level": [education],
@@ -43,5 +40,8 @@ if st.button("Predict"):
         df[col] = encoder[col].transform(df[col])
 
     # Make prediction
-prediction = model.predict(df)
-st.success(f"Predicted Salary: {prediction[0]:,.2f}")
+    prediction = model.predict(df)
+
+    # Show result
+    st.success(f"Predicted Salary: {prediction[0]:,.2f}")
+
