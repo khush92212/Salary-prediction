@@ -28,7 +28,7 @@ job_title = st.selectbox("Job Title", encoder["Job Title"].classes_)
 years_of_exp = st.number_input("Years of Experience",0,40)
 
 # Create dataframe
-df = pd.DataFrame({
+df = pd.dataFrame({
     "Age": [age],
     "Gender": [gender],
     "Education Level": [education],
