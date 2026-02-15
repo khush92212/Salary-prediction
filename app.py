@@ -44,4 +44,3 @@ prediction = model.predict(df)
 
     # Show result
 st.success(f"Predicted Salary: {prediction[0]:,.2f}")
-
